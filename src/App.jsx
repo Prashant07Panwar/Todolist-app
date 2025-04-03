@@ -74,7 +74,7 @@ const togglefinished = (e) => {
      <div className="md:container md:mx-auto bg-violet-100 p-5 my-5 rounded-xl md:w-[35%] w-full">
         <h1 className='text-2xl font-bold text-center'>iTask - Manage your todos at one place</h1>
         <div className="addtodo my-3 flex flex-col  gap-4 items-start">
-        <h2 className='text-base font-bold'>Add a Todo</h2>
+        <h2 className='text-base font-bold '>Add a Todo</h2>
         <div className="flex w-full">
         <input className='w-full rounded-full px-5 py-1' onChange={handleclick} type="text" value={todo}/>
         <button className='bg-violet-800 hover:bg-violet-950 disabled:bg-violet px-4 py-1 text-sm font-bold text-white rounded-full mx-2' onClick={handleAdd} disabled={todo.length<=3}>Save</button>
