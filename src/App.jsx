@@ -9,22 +9,25 @@ function App() {
   const [showfinished, setshowfinished] = useState(true)
   const [todos, settodos] = useState([])
 
+  useEffect(() => {
+    let todostring = localStorage.getItem("todos")
+    if(todostring){
+     let ts = JSON.parse(localStorage.getItem("todos"))
+     settodos(ts)
+    }
+  },[])
+  
+  useEffect(() => {
+    localStorage.setItem('todos', JSON.stringify(todos));
+  }, [todos]);
+  
   const savetols = ()=>{
     localStorage.setItem("todos",JSON.stringify(todos))
   }
-  
- useEffect(() => {
-   let todostring = localStorage.getItem("todos")
-   if(todostring){
-    let ts = JSON.parse(localStorage.getItem("todos"))
-    settodos(ts)
-   }
- },[])
-
- useEffect(() => {
-  localStorage.setItem('todos', JSON.stringify(todos));
-}, [todos]);
  
+const togglefinished = (e) => {
+  setshowfinished(!showfinished)
+}
   
   const handleclick = (e)=>{
     settodo(e.target.value)
@@ -47,7 +50,7 @@ function App() {
     settodo("")
     savetols()
   }
-  const handleline =(e) => {
+  const handlecheckbox =(e) => {
     let id = e.target.name
     let index = todos.findIndex(item=>{
       return item.id==id
@@ -64,8 +67,6 @@ function App() {
     settodos(newtodos)
     savetols()
   }
-  
-  
 
   return (
     <>
@@ -79,7 +80,7 @@ function App() {
         <button className='bg-violet-800 hover:bg-violet-950 disabled:bg-violet px-4 py-1 text-sm font-bold text-white rounded-full mx-2' onClick={handleAdd} disabled={todo.length<=3}>Save</button>
         </div>
         </div>
-        <input className='mt-3 mb-2' type="checkbox" id='show' checked={showfinished} onChange={()=>{setshowfinished(!showfinished)}}/> <label For="show">Show Finished</label>
+        <input className='mt-3 mb-2' type="checkbox" id='show' checked={showfinished} onChange={togglefinished}/> <label For="show">Show Finished</label>
         <div className='h-[1px] bg-black opacity-15 w-[90%] mx-auto my-1'></div>
         <h2 className='text-base font-bold my-1'>Your todos</h2>
         <div className="todos">
@@ -87,7 +88,7 @@ function App() {
          {todos.map(item=>{
            return (showfinished || !item.isCompleted) &&<div key={item.id} className="todo flex justify-between w-full my-1">
             <div className='flex gap-2 text-sm items-center'>
-            <input type="checkbox" onChange={handleline} checked={item.isCompleted} name={item.id} />
+            <input type="checkbox" onChange={handlecheckbox} checked={item.isCompleted} name={item.id} />
             <div className={item.isCompleted?"line-through":""}>{item.todo}</div>
             </div>
             <div className="buttons flex">
