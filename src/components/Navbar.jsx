@@ -4,7 +4,7 @@ const Navbar = () => {
   return (
     <nav className='flex bg-indigo-900 justify-around py-2 text-white'>
      <div className='logo'>
-      <span className='font-bold mx-8 text-xl cursor-pointer hover:font-bold'>iTodo</span>
+      <span className='font-bold mx-8 text-xl cursor-pointer hover:font-extrabold'>iTodo</span>
       </div>
      <div>
         <ul className='flex gap-8 mx-9'>
